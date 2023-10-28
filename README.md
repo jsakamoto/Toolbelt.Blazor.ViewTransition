@@ -4,6 +4,8 @@
 
 A router component and a service that makes your Blazor apps have pretty animated transition effects between pages with the View Transitions API.
 
+- _Live Demo_ - https://jsakamoto.github.io/Toolbelt.Blazor.ViewTransition/
+
 [![](https://raw.githubusercontent.com/jsakamoto/Toolbelt.Blazor.ViewTransition/main/.assets/introduction-video-cover.jpg)](https://github.com/jsakamoto/Toolbelt.Blazor.ViewTransition/assets/95908/f477910a-4166-4ce1-82dd-ee3874fdb966)
 
 ## 🚀 Quick Start
