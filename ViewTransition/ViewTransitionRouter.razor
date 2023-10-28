@@ -1,5 +1,6 @@
 @using Microsoft.Extensions.DependencyInjection;
 @using System.Reflection;
+@using System.Diagnostics.CodeAnalysis
 @implements IAsyncDisposable
 @inject IJSRuntime JSRuntime
 @inject IServiceProvider ServiceProvider
@@ -17,6 +18,7 @@
     /// Gets or sets the type of router component to use. The default is the type of <see cref="Router"/>.
     /// </summary>
     [Parameter]
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
     public Type TypeOfRouter { get; set; } = typeof(Router);
 
     /// <summary>

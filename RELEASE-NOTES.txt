@@ -1,2 +1,5 @@
+v.1.0.1
+- Fix: published apps didn't work. (Lack of IL Trimming configuration)
+
 v.1.0.0
 - 1st release.
