@@ -1,0 +1,29 @@
+﻿ul {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+li {
+    display: flex;
+    list-style: none;
+}
+
+    li a {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+a:hover {
+    text-decoration: none;
+}
+
+a h2 {
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s ease-in-out;
+}
+
+a:hover h2 {
+    border-bottom: 2px solid #9780E5;
+}

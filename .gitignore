@@ -1,0 +1,8 @@
+.vs/
+bin/
+obj/
+_dist/*.nupkg
+node_modules/
+*.user
+*.suo
+~$*.*

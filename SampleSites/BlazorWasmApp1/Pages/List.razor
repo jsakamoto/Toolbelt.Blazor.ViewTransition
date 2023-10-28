@@ -1,0 +1,15 @@
+﻿@page "/"
+
+<ul>
+    @foreach (var site in SeattleTouristSites.Data)
+    {
+        <li>
+            <a href="./place/@site.Id">
+                <img src="./images/t@(site.Id).jpg" class="place-image" style="view-transition-name: site-image-@(site.Id)" />
+                <h2 style="view-transition-name: site-name-@(site.Id)">
+                    @site.Name
+                </h2>
+            </a>
+        </li>
+    }
+</ul>

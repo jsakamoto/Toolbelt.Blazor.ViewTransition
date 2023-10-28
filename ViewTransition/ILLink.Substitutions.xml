@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="Toolbelt.Blazor.ViewTransition">
+    <type fullname="Toolbelt.Blazor.ViewTransition.ViewTransitionService">
+      <method signature="System.String GetVersionText()" body="stub" value="1.0.0" />
+    </type>
+  </assembly>
+</linker>

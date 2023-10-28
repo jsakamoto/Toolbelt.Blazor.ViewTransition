@@ -1,0 +1,106 @@
+@using Microsoft.Extensions.DependencyInjection;
+@using System.Reflection;
+@implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
+@inject IServiceProvider ServiceProvider
+
+<DynamicComponent Type="@TypeOfRouter" Parameters="_Parameters">
+</DynamicComponent>
+
+@code
+{
+    private IViewTransition? _ViewTransition;
+
+    private bool _FirstRendered = false;
+
+    /// <summary>
+    /// Gets or sets the type of router component to use. The default is the type of <see cref="Router"/>.
+    /// </summary>
+    [Parameter]
+    public Type TypeOfRouter { get; set; } = typeof(Router);
+
+    /// <summary>
+    /// Gets or sets the assembly that should be searched for components matching the URI.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public Assembly AppAssembly { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets a collection of additional assemblies that should be searched for components
+    /// that can match URIs.
+    /// </summary>
+    [Parameter] public IEnumerable<Assembly> AdditionalAssemblies { get; set; } = Enumerable.Empty<Assembly>();
+
+    /// <summary>
+    /// Gets or sets the content to display when no match is found for the requested route.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public RenderFragment NotFound { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the content to display when a match is found for the requested route.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public RenderFragment<RouteData> Found { get; set; } = null!;
+
+    /// <summary>
+    /// Get or sets the content to display when asynchronous navigation is in progress.
+    /// </summary>
+    [Parameter] public RenderFragment? Navigating { get; set; }
+
+    /// <summary>
+    /// Gets or sets a handler that should be called before navigating to a new page.
+    /// </summary>
+    [Parameter] public EventCallback<NavigationContext> OnNavigateAsync { get; set; }
+
+    /// <summary>
+    /// Gets or sets a flag to indicate whether route matching should prefer exact matches
+    /// over wildcards.
+    /// <para>This property is obsolete and configuring it does nothing.</para>
+    /// </summary>
+    [Parameter] public bool PreferExactMatches { get; set; }
+
+    private Dictionary<string, object> _Parameters = new();
+
+    private IViewTransition GetViewTransition()
+    {
+        _ViewTransition ??= this.ServiceProvider.GetService<IViewTransition>();
+        _ViewTransition ??= new ViewTransitionService(this.JSRuntime);
+        return _ViewTransition;
+    }
+
+    protected override void OnParametersSet()
+    {
+        _Parameters = new()
+            {
+                ["AppAssembly"] = AppAssembly,
+                ["AdditionalAssemblies"] = AdditionalAssemblies,
+                ["NotFound"] = NotFound,
+                ["Found"] = Found,
+                ["Navigating"] = Navigating!,
+                ["OnNavigateAsync"] = EventCallback.Factory.Create<NavigationContext>(this, OnNavigateAsyncInternal),
+                ["PreferExactMatches"] = PreferExactMatches,
+            };
+    }
+
+    protected async Task OnNavigateAsyncInternal(NavigationContext navigationContext)
+    {
+        if (_FirstRendered) await this.GetViewTransition().BeginAsync();
+        await OnNavigateAsync.InvokeAsync(navigationContext);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) _FirstRendered = true;
+        else
+        {
+            await this.GetViewTransition().EndAsync();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try { if (this._ViewTransition is IAsyncDisposable viewTransition) await viewTransition.DisposeAsync(); }
+        catch (JSDisconnectedException) { }
+    }
+}

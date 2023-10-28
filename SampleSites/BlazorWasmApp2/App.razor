@@ -1,0 +1,33 @@
+﻿@inject IViewTransition ViewTransition
+
+<Router AppAssembly="@typeof(App).Assembly" OnNavigateAsync="OnNavigateAsync">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="[autofocus]" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code
+{
+    private bool _FirstRendered = false;
+
+    protected async Task OnNavigateAsync()
+    {
+        if (_FirstRendered) await this.ViewTransition.BeginAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) _FirstRendered = true;
+        else
+        {
+            await this.ViewTransition.EndAsync();
+        }
+    }
+}
