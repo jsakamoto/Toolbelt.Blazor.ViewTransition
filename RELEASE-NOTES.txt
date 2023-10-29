@@ -1,3 +1,6 @@
+v.1.0.2
+- Fix: It causes an error on web browsers that unsupported View Transition API.
+
 v.1.0.1
 - Fix: published apps didn't work. (Lack of IL Trimming configuration)
 
