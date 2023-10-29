@@ -1,0 +1,1 @@
+export const viewTransitionApiAvailable = () => typeof(document.startViewTransition) !== 'undefined';

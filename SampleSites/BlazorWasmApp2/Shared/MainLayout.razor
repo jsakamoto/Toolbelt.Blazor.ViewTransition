@@ -1,8 +1,34 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
 
 <header>
     <h1>Seattle Tourist Atractions</h1>
+
+    @if (!_viewTransitionApiAvailable)
+    {
+        <div class="info">
+            This browser doesn't support the View Transition API, so the page will not be animated for the transition.
+            See also the <a href="https://caniuse.com/?search=ViewTransition" target="_blank">browser's compatibility table</a>.
+        </div>
+    }
+
 </header>
 <main>
     @Body
 </main>
+
+@code
+{
+    private bool _viewTransitionApiAvailable = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await using var module = await this.JSRuntime.InvokeAsync<IJSObjectReference?>("import", "./Shared/MainLayout.razor.js");
+            if (module == null) throw new Exception("Could not import: ./Shared/MainLayout.razor.js");
+            this._viewTransitionApiAvailable = await module.InvokeAsync<bool>("viewTransitionApiAvailable");
+            this.StateHasChanged();
+        }
+    }
+}

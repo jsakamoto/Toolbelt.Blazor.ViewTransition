@@ -10,6 +10,13 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
+.info {
+    color: #DE33BB;
+    padding: 4px 8px;
+    border: solid 2px #DE33BB;
+    border-radius: 8px;
+}
+
 ::view-transition-group(*) {
     animation-duration: 0.5s;
 }
