@@ -1,0 +1,51 @@
+﻿@page "/place/{id:int}"
+
+<section>
+    <div>
+        <a href="./" class="back-button">
+            arrow_back_ios_new
+        </a>
+    </div>
+
+    @if (_SiteData != null)
+    {
+        <article>
+            <h2>
+                <span style="view-transition-name: site-name-@(Id)">@_SiteData.Name</span>
+            </h2>
+
+            <content>
+
+                <div class="image-area">
+                    <img src="images/@(Id).jpg" class="place-image" style="view-transition-name: site-image-@(Id)" />
+                </div>
+
+                <div class="description-area">
+                    <div>
+                        @_SiteData.Description
+                    </div>
+                    <div>
+                        <a href="@_SiteData.WikipediaUrl" target="_blank">
+                            @_SiteData.WikipediaUrl
+                        </a>
+                    </div>
+                </div>
+
+            </content>
+
+        </article>
+    }
+</section>
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+    private SiteData? _SiteData;
+
+    protected override void OnInitialized()
+    {
+        _SiteData = SeattleTouristSites.Data.FirstOrDefault(s => s.Id == Id);
+    }
+}

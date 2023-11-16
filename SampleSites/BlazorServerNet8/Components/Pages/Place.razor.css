@@ -1,0 +1,45 @@
+﻿section {
+    display: flex;
+}
+
+.back-button {
+    --size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 20px 0 0;
+    width: var(--size);
+    height: var(--size);
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--button-base);
+    font-family: 'Material Symbols Outlined';
+    font-size: 1.2rem;
+}
+
+    .back-button:hover,
+    .back-button:focus {
+        text-decoration: none;
+    }
+
+article {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-right: 24px;
+}
+
+.image-area {
+    flex-basis: 70%;
+    max-width:400px;
+}
+
+.description-area {
+    flex-basis: 30%;
+}

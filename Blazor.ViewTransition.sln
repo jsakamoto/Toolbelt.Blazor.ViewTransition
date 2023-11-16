@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{D862B5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmApp2", "SampleSites\BlazorWasmApp2\BlazorWasmApp2.csproj", "{606BE1C2-6187-448E-853D-FE8743845255}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerNet8", "SampleSites\BlazorServerNet8\BlazorServerNet8.csproj", "{83AA8DA9-A13A-4C5A-AACD-8E84DFE6F423}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{606BE1C2-6187-448E-853D-FE8743845255}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{606BE1C2-6187-448E-853D-FE8743845255}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{606BE1C2-6187-448E-853D-FE8743845255}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83AA8DA9-A13A-4C5A-AACD-8E84DFE6F423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AA8DA9-A13A-4C5A-AACD-8E84DFE6F423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AA8DA9-A13A-4C5A-AACD-8E84DFE6F423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AA8DA9-A13A-4C5A-AACD-8E84DFE6F423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C86AC8AA-A785-41AA-9BB9-FFFA01D879C8} = {0E008807-B359-4079-8C33-8632FC5DC988}
 		{606BE1C2-6187-448E-853D-FE8743845255} = {0E008807-B359-4079-8C33-8632FC5DC988}
+		{83AA8DA9-A13A-4C5A-AACD-8E84DFE6F423} = {0E008807-B359-4079-8C33-8632FC5DC988}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6D017638-2B58-40D4-A320-8F5712A2EC46}
