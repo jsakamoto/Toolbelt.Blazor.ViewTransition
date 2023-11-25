@@ -1,0 +1,22 @@
+﻿body {
+    font-family: "Space Grotesk", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    background: linear-gradient(to bottom right, #9780E5, #DE33BB);
+    background-clip: text;
+    -webkit-background: -webkit-linear-gradient(to bottom right, #9780E5, #DE33BB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info {
+    color: #DE33BB;
+    padding: 4px 8px;
+    border: solid 2px #DE33BB;
+    border-radius: 8px;
+}
+
+::view-transition-group(*) {
+    animation-duration: 0.5s;
+}
