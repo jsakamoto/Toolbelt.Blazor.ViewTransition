@@ -16,7 +16,7 @@ A router component and a service that makes your Blazor apps have pretty animate
 dotnet add package Toolbelt.Blazor.ViewTransition
 ```
 
-3. Open `Toolbelt.Blazor.ViewTransition` namespace in the `_Imports.razor` file.
+2. Open `Toolbelt.Blazor.ViewTransition` namespace in the `_Imports.razor` file.
 
 ```razor
 @* This is "_Imports.razor" *@
@@ -24,7 +24,7 @@ dotnet add package Toolbelt.Blazor.ViewTransition
 @using Toolbelt.Blazor.ViewTransition
 ```
 
-4. Replace a router component to use the `ViewTransitionRouter`.
+3. Replace a router component to use the `ViewTransitionRouter`.
 
 ```html
 @** App.razor **@
@@ -44,7 +44,7 @@ dotnet add package Toolbelt.Blazor.ViewTransition
 </ViewTransitionRouter>
 ```
 
-5. That's all. You will see the default cross-fade transition effect when you move between pages!
+4. That's all. You will see the default cross-fade transition effect when you move between pages!
 
 [![](https://raw.githubusercontent.com/jsakamoto/Toolbelt.Blazor.ViewTransition/main/.assets/quick-start-001.jpg)](https://github.com/jsakamoto/Toolbelt.Blazor.ViewTransition/assets/95908/4bb6804f-395d-45d4-9ed5-80dae5adddb6)
 
