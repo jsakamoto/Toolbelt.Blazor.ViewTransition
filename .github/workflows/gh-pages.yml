@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the code
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Install .NET SDK
       - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 9.0.x
       - name: Install .NET WebAssembly Tools
         run: dotnet workload install wasm-tools
 
       # Publish the site
       - name: Publish
-        run: dotnet publish SampleSites/BlazorWasmApp1/BlazorWasmApp1.csproj -c:Release -o:public -p:GHPages=true -f:net7.0
+        run: dotnet publish SampleSites/BlazorWasmApp1/BlazorWasmApp1.csproj -c:Release -o:public -p:GHPages=true -f:net9.0
 
       # Deploy the site
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: public/wwwroot
