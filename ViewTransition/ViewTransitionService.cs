@@ -1,4 +1,3 @@
-﻿using System.Reflection;
 using Microsoft.JSInterop;
 
 namespace Toolbelt.Blazor.ViewTransition;
@@ -16,21 +15,13 @@ internal class ViewTransitionService : IViewTransition, IAsyncDisposable
         this._JSRuntime = jsRuntime;
     }
 
-    private string GetVersionText()
-    {
-        var assembly = this.GetType().Assembly;
-        return assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-            .InformationalVersion ?? assembly.GetName().Version?.ToString() ?? "0.0.0";
-    }
-
     private async ValueTask<IJSObjectReference> GetModuleAsync()
     {
         if (this._Module == null)
         {
             var scriptPath = "./_content/Toolbelt.Blazor.ViewTransition/script.min.js";
             var isOnLine = await this._JSRuntime.InvokeAsync<bool>("Toolbelt.Blazor.getProperty", "navigator.onLine");
-            if (isOnLine) scriptPath += $"?v={this.GetVersionText()}";
+            if (isOnLine) scriptPath += $"?v={VersionInfo.VersionText}";
             this._Module = await this._JSRuntime.InvokeAsync<IJSObjectReference>("import", scriptPath);
         }
         return this._Module;

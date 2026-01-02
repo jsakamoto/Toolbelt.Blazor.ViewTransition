@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);1591</NoWarn>
@@ -9,14 +9,14 @@
     <RootNamespace>Toolbelt.Blazor.ViewTransition</RootNamespace>
     <AssemblyName>Toolbelt.Blazor.ViewTransition</AssemblyName>
     <IsTrimmable>true</IsTrimmable>
-    <PrepareForBuildDependsOn>$(PrepareForBuildDependsOn);UpdateILLinkSubstitutionsXml</PrepareForBuildDependsOn>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
+    <PrepareForBuildDependsOn>$(PrepareForBuildDependsOn);_GenerateVersionInfoClass</PrepareForBuildDependsOn>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.4</Version>
-    <Copyright>Copyright © 2023-2025 J.Sakamoto, Mozilla Public License 2.0</Copyright>
+    <Version>2.0.0</Version>
+    <Copyright>Copyright © 2023-2026 J.Sakamoto, Mozilla Public License 2.0</Copyright>
     <Authors>J.Sakamoto</Authors>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/jsakamoto/Toolbelt.Blazor.ViewTransition/</RepositoryUrl>
@@ -42,15 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Toolbelt.Blazor.GetProperty.Script" Version="1.2.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+    <PackageReference Include="Toolbelt.Blazor.GetProperty.Script" Version="1.3.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
@@ -61,9 +53,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
   </ItemGroup>
 
-  <Target Name="UpdateILLinkSubstitutionsXml" Inputs="Blazor.ViewTransition.csproj" Outputs="ILLink.Substitutions.xml">
-    <XmlPoke XmlInputPath="ILLink.Substitutions.xml" Query="/linker/assembly/type/method[@signature='System.String GetVersionText()']/@value" Value="$(Version)" />
-  </Target>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
+  </ItemGroup>
 
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
     <ReadLinesFromFile File="../RELEASE-NOTES.txt">
@@ -74,6 +66,17 @@
       <PackageReleaseNotes>$([System.Text.RegularExpressions.Regex]::Match($(PackageReleaseNotes),"^(v\.[\d\.]+.+?)v\.[\d\.]+",System.Text.RegularExpressions.RegexOptions.Singleline).Groups[1].Value)</PackageReleaseNotes>
       <PackageReleaseNotes>$(PackageReleaseNotes)%0a%0aTo see all the change logs, please visit the following URL.%0a- https://github.com/jsakamoto/Toolbelt.Blazor.ViewTransition/blob/main/RELEASE-NOTES.txt</PackageReleaseNotes>
     </PropertyGroup>
+  </Target>
+
+  <Target Name="_GenerateVersionInfoClass" Inputs="Blazor.ViewTransition.csproj" Outputs="VersionInfo.cs">
+    <ItemGroup>
+      <VersionInfoLines Include="namespace $(RootNamespace)%3b%0d%0a"/>
+      <VersionInfoLines Include="internal static class VersionInfo"/>
+      <VersionInfoLines Include="{"/>
+      <VersionInfoLines Include="%20%20%20%20internal const string VersionText = &quot;$(Version)&quot;%3b"/>
+      <VersionInfoLines Include="}"/>
+    </ItemGroup>
+    <WriteLinesToFile File="VersionInfo.cs" Overwrite="true" Lines="@(VersionInfoLines)"></WriteLinesToFile>
   </Target>
 
 </Project>

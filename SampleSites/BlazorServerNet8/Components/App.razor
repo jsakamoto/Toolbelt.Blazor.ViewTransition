@@ -1,22 +1,25 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blazor View Transition Router | Server</title>
     <base href="/" />
+    <ResourcePreloader />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Space+Grotesk:wght@700&display=swap" />
-    <link rel="stylesheet" href="css/water.css" />
-    <link rel="stylesheet" href="css/blazor-ui.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="BlazorServerNet8.styles.css" />
+    <link rel="stylesheet" href="@Assets["css/water.css"]" />
+    <link rel="stylesheet" href="@Assets["css/blazor-ui.css"]" />
+    <link rel="stylesheet" href="@Assets["css/styles.css"]" />
+    <link rel="stylesheet" href="@Assets["BlazorServerNet8.styles.css"]" />
+    <ImportMap />
     <HeadOutlet />
 </head>
 
 <body>
     <Routes @rendermode="InteractiveServer" />
-    <script src="_framework/blazor.web.js"></script>
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
 </body>
 
 </html>

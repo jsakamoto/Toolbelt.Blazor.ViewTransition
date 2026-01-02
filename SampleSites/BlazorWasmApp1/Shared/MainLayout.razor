@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+@using System.Runtime.InteropServices
+@inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
 
 <header>
@@ -16,6 +17,10 @@
 <main>
     @Body
 </main>
+
+<footer style="view-transition-name: footer; margin-top: 32px;">
+    @RuntimeInformation.FrameworkDescription / @RuntimeInformation.ProcessArchitecture / ViewTransitionRouter
+</footer>
 
 @code
 {
