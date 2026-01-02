@@ -1,0 +1,77 @@
+/* /App.razor.rz.scp.css */
+/* /Pages/List.razor.rz.scp.css */
+ul[b-dg37qsywke] {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+li[b-dg37qsywke] {
+    display: flex;
+    list-style: none;
+}
+
+    li a[b-dg37qsywke] {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+a:hover[b-dg37qsywke] {
+    text-decoration: none;
+}
+
+a h2[b-dg37qsywke] {
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s ease-in-out;
+}
+
+a:hover h2[b-dg37qsywke] {
+    border-bottom: 2px solid #9780E5;
+}
+/* /Pages/Place.razor.rz.scp.css */
+section[b-m8q6ede1e9] {
+    display: flex;
+}
+
+.back-button[b-m8q6ede1e9] {
+    --size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 20px 0 0;
+    width: var(--size);
+    height: var(--size);
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--button-base);
+    font-family: 'Material Symbols Outlined';
+    font-size: 1.2rem;
+}
+
+    .back-button:hover[b-m8q6ede1e9],
+    .back-button:focus[b-m8q6ede1e9] {
+        text-decoration: none;
+    }
+
+article[b-m8q6ede1e9] {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+content[b-m8q6ede1e9] {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-right: 24px;
+}
+
+.image-area[b-m8q6ede1e9] {
+    flex-basis: 70%;
+    max-width:400px;
+}
+
+.description-area[b-m8q6ede1e9] {
+    flex-basis: 30%;
+}
