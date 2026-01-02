@@ -1,3 +1,8 @@
+v.2.0.0
+- Update: Added support for .NET 10, and dropped support for .NET 7 or earlier.
+- Improve: Removed the dependency on the Toolbelt.Blazor.GetProperty.Script NuGet package for .NET 10 or later projects.
+- Improve: Better support for controlling JavaScript caching strategies on .NET 10 or later projects.
+
 v.1.0.4
 - Fix: typo in the README document
 - Enhance: Add net9.0 to the supported framework list
