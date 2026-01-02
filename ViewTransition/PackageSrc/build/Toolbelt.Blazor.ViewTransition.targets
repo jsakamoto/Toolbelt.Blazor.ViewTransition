@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <ToolbeltBlazorViewTransitionJavaScriptCacheBusting Condition=" '$(ToolbeltBlazorViewTransitionJavaScriptCacheBusting)' == '' ">true</ToolbeltBlazorViewTransitionJavaScriptCacheBusting>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(RuntimeIdentifier)' == 'browser-wasm' AND '$(ToolbeltBlazorViewTransitionJavaScriptCacheBusting)' != '' ">
+    <RuntimeHostConfigurationOption Include="Toolbelt.Blazor.ViewTransition.JavaScriptCacheBusting" Value="$(ToolbeltBlazorViewTransitionJavaScriptCacheBusting)" Trim="true" />
+  </ItemGroup>
+
+</Project>

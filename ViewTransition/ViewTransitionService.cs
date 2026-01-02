@@ -10,6 +10,8 @@ internal class ViewTransitionService : IViewTransition, IAsyncDisposable
 
     private IJSObjectReference? _Module = null;
 
+    private static bool CacheBustingEnabled() => Environment.GetEnvironmentVariable("TOOLBELT_BLAZOR_VIEWTRANSITION_JSCACHEBUSTING") != "0";
+
     public ViewTransitionService(IJSRuntime jsRuntime)
     {
         this._JSRuntime = jsRuntime;
@@ -19,10 +21,20 @@ internal class ViewTransitionService : IViewTransition, IAsyncDisposable
     {
         if (this._Module == null)
         {
+#if NET10_0_OR_GREATER
+            var cacheBustingQueryAsync = CacheBustingEnabled() ?
+                this._JSRuntime.GetValueAsync<bool>("navigator.onLine").AsTask().ContinueWith(static task => task.Result ? "?v=" + VersionInfo.VersionText : "") :
+                Task.FromResult("");
+
+            this._Module = await cacheBustingQueryAsync
+                .ContinueWith(task => this._JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/Toolbelt.Blazor.ViewTransition/script.min.js" + task.Result).AsTask())
+                .Unwrap();
+#else
             var scriptPath = "./_content/Toolbelt.Blazor.ViewTransition/script.min.js";
             var isOnLine = await this._JSRuntime.InvokeAsync<bool>("Toolbelt.Blazor.getProperty", "navigator.onLine");
             if (isOnLine) scriptPath += $"?v={VersionInfo.VersionText}";
             this._Module = await this._JSRuntime.InvokeAsync<IJSObjectReference>("import", scriptPath);
+#endif
         }
         return this._Module;
     }

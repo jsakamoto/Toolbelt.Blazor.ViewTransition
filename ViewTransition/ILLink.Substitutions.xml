@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <linker>
   <assembly fullname="Toolbelt.Blazor.ViewTransition">
-    <type fullname="Toolbelt.Blazor.ViewTransition.ViewTransitionService">
-      <method signature="System.String GetVersionText()" body="stub" value="2.0.0" />
+    <type feature="Toolbelt.Blazor.ViewTransition.JavaScriptCacheBusting" featurevalue="true" fullname="Toolbelt.Blazor.ViewTransition.ViewTransitionService">
+      <method signature="System.Boolean CacheBustingEnabled()" body="stub" value="true" />
+    </type>
+    <type feature="Toolbelt.Blazor.ViewTransition.JavaScriptCacheBusting" featurevalue="false" fullname="Toolbelt.Blazor.ViewTransition.ViewTransitionService">
+      <method signature="System.Boolean CacheBustingEnabled()" body="stub" value="false" />
     </type>
   </assembly>
 </linker>

@@ -1,0 +1,3 @@
+<Project>
+  <Import Project="..\build\Toolbelt.Blazor.ViewTransition.targets" />
+</Project>
