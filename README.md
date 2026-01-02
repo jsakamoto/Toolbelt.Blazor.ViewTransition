@@ -1,4 +1,4 @@
-﻿# Blazor View Transition [![NuGet Package](https://img.shields.io/nuget/v/Toolbelt.Blazor.ViewTransition.svg)](https://www.nuget.org/packages/Toolbelt.Blazor.ViewTransition/)
+# Blazor View Transition [![NuGet Package](https://img.shields.io/nuget/v/Toolbelt.Blazor.ViewTransition.svg)](https://www.nuget.org/packages/Toolbelt.Blazor.ViewTransition/)
 
 ## 📝 Summary
 
@@ -112,6 +112,42 @@ builder.Services.AddViewTransition(); // 👈 Add this line.
     }
 }
 ```
+
+## 🛠️ JavaScript file cache busting
+
+This library includes and uses a JavaScript file to access the browser's View Transition API. When you update this library to a newer version, the browser may use the cached previous version of the JavaScript file, leading to unexpected behavior. To prevent this issue, the library appends a version query string to the JavaScript file URL when loading it.
+
+### .NET 8 and 9
+
+A version query string will always be appended to this library's JavaScript file URL regardless of the Blazor hosting model you are using.
+
+### .NET 10 or later
+
+By default, a version query string will be appended to the JavaScript file URL that this library loads. If you want to disable appending a version query string to the JavaScript file URL, you can do so by setting the `TOOLBELT_BLAZOR_VIEWTRANSITION_JSCACHEBUSTING` environment variable to `0`.
+
+```csharp
+// Program.cs
+...
+// 👇 Add this line to disable appending a version query string for this library's JavaScript file.
+Environment.SetEnvironmentVariable("TOOLBELT_BLAZOR_VIEWTRANSITION_JSCACHEBUSTING", "0");
+
+var builder = WebApplication.CreateBuilder(args);
+...
+```
+
+**However,** when you publish a .NET 10 Blazor WebAssembly app, a version query string will always be appended to the JavaScript file URL regardless of the `TOOLBELT_BLAZOR_VIEWTRANSITION_JSCACHEBUSTING` environment variable setting. The reason is that published Blazor WebAssembly standalone apps don't include import map entries for JavaScript files from NuGet packages. If you want to avoid appending a version query string to the JavaScript file URL in published Blazor WebAssembly apps, you need to set the `ToolbeltBlazorViewTransitionJavaScriptCacheBusting` MSBuild property to `false` in the project file of the Blazor WebAssembly app, like this:
+
+```xml
+<PropertyGroup>
+  <ToolbeltBlazorViewTransitionJavaScriptCacheBusting>false</ToolbeltBlazorViewTransitionJavaScriptCacheBusting>
+</PropertyGroup>
+```
+
+### Why do we append a version query string to the JavaScript file URL regardless of whether the import map is available or not?
+
+We know that .NET 9 or later allows us to use import maps to import JavaScript files with a fingerprint in their file names. Therefore, in .NET 9 or later Blazor apps, you may want to avoid appending a version query string to the JavaScript file URL that this library loads.
+
+However, we recommend keeping the default behavior of appending a version query string to the JavaScript file URL. The reason is that published Blazor WebAssembly standalone apps don't include import map entries for JavaScript files from NuGet packages. This inconsistent behavior between development and production environments and hosting models may lead to unexpected issues that are hard to diagnose, particularly in AutoRender mode apps.
 
 ## 🎉 Release Note
 
