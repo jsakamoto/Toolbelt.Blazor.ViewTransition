@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/README/">
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="RELEASE-NOTES.txt" />
+  </Folder>
+  <Folder Name="/SampleSites/">
+    <Project Path="SampleSites/BlazorServerNet8/BlazorServerNet8.csproj" />
+    <Project Path="SampleSites/BlazorWasmApp1/BlazorWasmApp1.csproj" />
+    <Project Path="SampleSites/BlazorWasmApp2/BlazorWasmApp2.csproj" />
+  </Folder>
+  <Project Path="ViewTransition/Blazor.ViewTransition.csproj" />
+</Solution>
